@@ -1,0 +1,10 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+	ignorecase = true
+	precomposeunicode = true
+[remote "origin"]
+	url = https://github.com/M4G3LL4N0/bourgaeux.git
+	fetch = +refs/heads/*:refs/remotes/origin/*

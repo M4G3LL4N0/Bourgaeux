@@ -1,0 +1,133 @@
+
+# 2026-03-26 15:03:44.599355
++y
+
+# 2026-03-26 15:03:46.773999
++Blitz the current Bourgaeux MVP forward without breaking what already works. Keep the existing AI recommendation flow fully working, but improve the product quality and app structure so this feels like a stronger startup prototype. Focus on three things only in this pass: first, make the homepage and onboarding/results experience feel more polished and productized; second, strengthen the recommendation output experience so the generated result looks more structured, premium, and easier to scan; third, make the API and AI prompt logic a little more robust so failures are handled better and output quality is more consistent. Do not add Supabase yet in this pass. Do not remove existing features. Keep the dark premium luxury-tech direction. Keep code clean, production-minded, and easy to extend into a social lifestyle product later. If needed, lightly improve copy to better position Bourgaeux as a lifestyle intelligence network for food, drink, entertainment, things to do, places to go, and blind-spot discovery. Avoid unnecessary dependencies. Preserve existing routes and keep the app easy to deploy on Vercel.
+
+# 2026-03-26 15:05:25.568109
++y
+
+# 2026-03-26 15:05:25.574504
++/run npm run dev
+
+# 2026-03-26 15:05:25.574627
++/run npm run dev
+
+# 2026-03-26 15:05:27.422835
++y
+
+# 2026-03-26 15:05:31.336841
++/exit
+
+# 2026-03-26 15:10:43.578028
++Turn Bourgaeux into a clearer social-plus-AI product on the homepage. Keep the assistant flow working, but make the page communicate that Bourgaeux is not just a recommendation form, it is the foundation of a lifestyle intelligence network. Improve the hero, page structure, section ordering, and preview surfaces so the user immediately understands three things: one, Bourgaeux helps them discover experiences they are missing; two, it can become a social platform for food, drink, entertainment, places, and things to do; three, their taste identity can become a meaningful product surface. Strengthen the feed preview so it looks more like a believable future app surface. Strengthen the onboarding area so it feels like a premium concierge-style assistant. Strengthen the result presentation so it feels high-signal and worth returning to. Keep the visual direction premium, restrained, dark, elegant, and mobile-friendly. Do not introduce clutter or over-design. Make the overall homepage feel like the front end of a real venture-backed consumer startup.
+
+# 2026-03-26 15:14:27.217500
++/exit
+
+# 2026-03-26 15:31:23.137987
++Fix the build errors related to missing modules "openai" and "zod" in a robust, production-safe way.
++
++Goals:
++1. Ensure the dependencies "openai" and "zod" are correctly added to package.json under dependencies (not devDependencies).
++2. Ensure the versions are stable and compatible with Next.js 14+ (use widely compatible versions).
++3. Update import usage if necessary to match the installed openai SDK version (modern OpenAI SDK uses `import OpenAI from "openai"` and `openai.responses.create`).
++4. Add defensive handling so the app does not crash if the OpenAI package fails to initialize or if environment variables are missing.
++5. Ensure TypeScript types compile cleanly (no implicit any issues).
++6. Do NOT remove existing functionality—keep the Bourgaeux recommendation logic intact.
++7. Keep the code clean and minimal—no unnecessary abstractions or libraries.
++8. Ensure that after this change, running "npm install && npm run build" succeeds without module resolution errors.
++9. If needed, slightly refactor src/lib/bourgaeux.ts so imports and usage are fully compatible with the installed packages.
++10. Do not break API routes or change their paths.
++
++Important:
++- This is a Next.js App Router project.
++- The goal is to make dependency resolution stable going forward.
++- Avoid introducing any breaking changes to the rest of the app.
++
++After editing, the project should:
++- install cleanly
++- build cleanly
++- still run the recommendation API
+
+# 2026-03-26 15:33:07.193850
++y
+
+# 2026-03-26 15:33:07.201075
++/run npm install
+
+# 2026-03-26 15:33:07.201274
++/run npm install
+
+# 2026-03-26 15:33:09.926116
++/run npm run build
+
+# 2026-03-26 15:33:09.926415
++/run npm run build
+
+# 2026-03-26 15:33:18.190947
++y
+
+# 2026-03-26 15:33:21.866103
++/exit
+
+# 2026-04-07 14:51:21.782942
++SYSTEM MODE: PORTFOLIO PREMIUM UI UPGRADE
++
++Venture: bourgaeux
++
++Premium visual system requirements:
++
++- Use a dark, premium, investor-ready aesthetic
++- Prefer deep navy, midnight blue, charcoal, and black backgrounds
++- Use subtle radial glows, soft gradients, and elegant atmospheric lighting
++- Use bold, high-contrast typography with large, confident headlines
++- Use gradient CTA buttons with warm orange, coral, pink, violet, or premium accent blends where appropriate
++- Use dark glassmorphism or soft translucent cards with rounded corners
++- Use clean spacing, stronger hierarchy, and premium section separation
++- Use grid-based layouts for showcase cards and product areas
++- Use refined shadows, subtle borders, and soft highlights
++- Avoid clutter, amateur gradients, random colors, and generic SaaS blandness
++- Make the product look like a premium holding company / venture platform / modern Apple-keynote-meets-high-end-startup brand
++- Improve mobile responsiveness, section rhythm, card consistency, and visual polish
++- Keep the venture’s own category and positioning, but translate it into the same premium design language
++
++Execution instructions:
++- upgrade the UI to match this premium visual system
++- improve layout, spacing, card design, section hierarchy, typography, button styling, mobile responsiveness, and polish
++- preserve the venture’s product meaning and content while making it feel aligned with Noaerth’s premium visual language
++- fix related visual inconsistencies across shared sections and core pages
++- keep the project buildable
++- do not ask questions
++- make the result feel materially more premium
+
+# 2026-04-07 14:51:21.783285
++SYSTEM MODE: PORTFOLIO PREMIUM UI UPGRADE
++
++Venture: bourgaeux
++
++Premium visual system requirements:
++
++- Use a dark, premium, investor-ready aesthetic
++- Prefer deep navy, midnight blue, charcoal, and black backgrounds
++- Use subtle radial glows, soft gradients, and elegant atmospheric lighting
++- Use bold, high-contrast typography with large, confident headlines
++- Use gradient CTA buttons with warm orange, coral, pink, violet, or premium accent blends where appropriate
++- Use dark glassmorphism or soft translucent cards with rounded corners
++- Use clean spacing, stronger hierarchy, and premium section separation
++- Use grid-based layouts for showcase cards and product areas
++- Use refined shadows, subtle borders, and soft highlights
++- Avoid clutter, amateur gradients, random colors, and generic SaaS blandness
++- Make the product look like a premium holding company / venture platform / modern Apple-keynote-meets-high-end-startup brand
++- Improve mobile responsiveness, section rhythm, card consistency, and visual polish
++- Keep the venture’s own category and positioning, but translate it into the same premium design language
++
++Execution instructions:
++- upgrade the UI to match this premium visual system
++- improve layout, spacing, card design, section hierarchy, typography, button styling, mobile responsiveness, and polish
++- preserve the venture’s product meaning and content while making it feel aligned with Noaerth’s premium visual language
++- fix related visual inconsistencies across shared sections and core pages
++- keep the project buildable
++- do not ask questions
++- make the result feel materially more premium

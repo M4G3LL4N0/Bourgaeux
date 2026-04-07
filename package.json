@@ -1,0 +1,21 @@
+{
+  "name": "bourgaeux",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@types/node": "^20.11.19",
+    "@types/react": "^18.2.45",
+    "next": "^14.2.35",
+    "openai": "^4.24.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "typescript": "^5.3.3",
+    "zod": "^3.22.4"
+  }
+}
