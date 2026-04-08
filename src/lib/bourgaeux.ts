@@ -3,6 +3,12 @@ export type Recommendation = {
   category: string;
   reason: string;
   nextStep: string;
+  city?: string;
+  recommendedBy?: string;
+  saved?: boolean;
+  likes?: number;
+  tags?: string[];
+  budget?: string;
 };
 
 export type RecommendationInput = {
