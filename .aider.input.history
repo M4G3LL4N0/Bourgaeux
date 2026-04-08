@@ -891,3 +891,170 @@
 +- fix root causes
 +- prefer deploy-worthy output
 +- avoid tiny cosmetic-only changes unless bundled with stronger progress
+
+# 2026-04-08 03:17:29.390664
++Venture: bourgaeux
++State: scaling
++Lane: release
++
++Current mission:
++- expand product depth
++- improve dashboard/features
++- ship incremental release
++
++Rules:
++- make meaningful progress
++- preserve build stability
++- fix root causes
++- prefer deploy-worthy output
++- avoid tiny cosmetic-only changes unless bundled with stronger progress
+
+# 2026-04-08 03:21:09.042334
++Venture: bourgaeux
++State: broken
++Lane: repair
++
++Current mission:
++- repair build blockers
++- fix type/module/env issues
++- restore successful build and deploy
++
++Rules:
++- make meaningful progress
++- preserve build stability
++- fix root causes
++- prefer deploy-worthy output
++- avoid tiny cosmetic-only changes unless bundled with stronger progress
+
+# 2026-04-08 06:11:14.473160
++Venture: bourgaeux
++State: broken
++Lane: repair
++
++Current mission:
++- repair build blockers
++- fix type/module/env issues
++- restore successful build and deploy
++
++Rules:
++- make meaningful progress
++- preserve build stability
++- fix root causes
++- prefer deploy-worthy output
++- avoid tiny cosmetic-only changes unless bundled with stronger progress
+
+# 2026-04-08 08:11:55.174853
++Venture: bourgaeux
++State: broken
++Lane: repair
++
++Current mission:
++- repair build blockers
++- fix type/module/env issues
++- restore successful build and deploy
++
++Rules:
++- make meaningful progress
++- preserve build stability
++- fix root causes
++- prefer deploy-worthy output
++- avoid tiny cosmetic-only changes unless bundled with stronger progress
+
+# 2026-04-08 08:15:11.083359
++Venture: bourgaeux
++State: broken
++Lane: repair
++
++Current mission:
++- repair build blockers
++- fix type/module/env issues
++- restore successful build and deploy
++
++Rules:
++- make meaningful progress
++- preserve build stability
++- fix root causes
++- prefer deploy-worthy output
++- avoid tiny cosmetic-only changes unless bundled with stronger progress
+
+# 2026-04-08 10:09:08.326465
++Venture: bourgaeux
++State: broken
++Lane: repair
++
++Current mission:
++- repair build blockers
++- fix type/module/env issues
++- restore successful build and deploy
++
++Rules:
++- make meaningful progress
++- preserve build stability
++- fix root causes
++- prefer deploy-worthy output
++- avoid tiny cosmetic-only changes unless bundled with stronger progress
+
+# 2026-04-08 10:12:10.859718
++Venture: bourgaeux
++State: broken
++Lane: repair
++
++Current mission:
++- repair build blockers
++- fix type/module/env issues
++- restore successful build and deploy
++
++Rules:
++- make meaningful progress
++- preserve build stability
++- fix root causes
++- prefer deploy-worthy output
++- avoid tiny cosmetic-only changes unless bundled with stronger progress
+
+# 2026-04-08 11:08:42.279489
++Venture: bourgaeux
++State: functional
++Lane: feature
++
++Current mission:
++- add meaningful product capability
++- strengthen UX flow
++- improve conversion surfaces
++
++Rules:
++- make meaningful progress
++- preserve build stability
++- fix root causes
++- prefer deploy-worthy output
++- avoid tiny cosmetic-only changes unless bundled with stronger progress
++
++Build error context:
++
++> bourgaeux@0.1.0 build
++> next build
++
++  ▲ Next.js 14.2.35
++  - Environments: .env.local
++
++   Creating an optimized production build ...
++ ✓ Compiled successfully
++   Linting and checking validity of types ...
++Failed to compile.
++
++./src/app/page.tsx:101:61
++Type error: Cannot find name 'form'.
++
++[0m [90m  99 |[39m                     [33m<[39m[33mdiv[39m[33m>[39m[0m
++[0m [90m 100 |[39m                       [33m<[39m[33mp[39m className[33m=[39m[32m"font-medium"[39m[33m>[39m{rec[33m.[39mrecommendedBy [33m||[39m [32m'Bourgaeux'[39m}[33m<[39m[33m/[39m[33mp[39m[33m>[39m[0m
++[0m[31m[1m>[22m[39m[90m 101 |[39m                       [33m<[39m[33mp[39m className[33m=[39m[32m"text-sm text-white/60"[39m[33m>[39m{form[33m.[39mcity [33m||[39m [32m'Your City'[39m}[33m<[39m[33m/[39m[33mp[39m[33m>[39m[0m
++[0m [90m     |[39m                                                             [31m[1m^[22m[39m[0m
++[0m [90m 102 |[39m                     [33m<[39m[33m/[39m[33mdiv[39m[33m>[39m[0m
++[0m [90m 103 |[39m                   [33m<[39m[33m/[39m[33mdiv[39m[33m>[39m[0m
++[0m [90m 104 |[39m                   [33m<[39m[33mdiv[39m className[33m=[39m[32m"mt-4"[39m[33m>[39m[0m
++Next.js build worker exited with code: 1 and signal: null
++
++Rules:
++- fix the actual build error shown above
++- do not make cosmetic-only changes
++- make the project buildable
++
