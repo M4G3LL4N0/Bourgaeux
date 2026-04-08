@@ -9,6 +9,21 @@ export type Recommendation = {
   likes?: number;
   tags?: string[];
   budget?: string;
+  error?: string;
+};
+
+export type ApiError = {
+  error: string;
+  code: string;
+};
+
+export type RecommendationResponse = {
+  profileSummary: string;
+  blindSpots: string[];
+  recommendations: Recommendation[];
+  socialAngle: string[];
+  upgradePath: string[];
+  error?: string;
 };
 
 export type RecommendationInput = {

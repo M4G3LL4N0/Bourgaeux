@@ -6,7 +6,25 @@ type RecommendationCardProps = {
 
 export default function RecommendationCard({
   recommendation,
-}: RecommendationCardProps) {
+  loading = false,
+}: RecommendationCardProps & { loading?: boolean }) {
+  if (loading) {
+    return (
+      <div className="card animate-pulse">
+        <div className="h-6 w-3/4 bg-white/10 rounded"></div>
+        <div className="mt-4 h-4 w-full bg-white/10 rounded"></div>
+        <div className="mt-2 h-4 w-5/6 bg-white/10 rounded"></div>
+      </div>
+    );
+  }
+
+  if (!recommendation) {
+    return (
+      <div className="card text-white/60">
+        No recommendation available
+      </div>
+    );
+  }
   return (
     <div className="card">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">

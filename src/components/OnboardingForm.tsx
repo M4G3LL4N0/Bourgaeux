@@ -41,12 +41,34 @@ export default function OnboardingForm() {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    
+    // Basic form validation
+    if (!form.city || !form.vibe) {
+      setError("Please fill in at least City and Vibe fields");
+      return;
+    }
+
     setLoading(true);
     setError("");
     setResult(null);
 
     try {
       const res = await fetch("/api/recommend", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...form,
+          // Ensure required fields have minimum length
+          city: form.city.trim(),
+          vibe: form.vibe.trim()
+        }),
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.error || "Failed to get recommendations");
+      }
         method: "POST",
         headers: {
           "Content-Type": "application/json",
