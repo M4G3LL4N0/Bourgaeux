@@ -9,6 +9,16 @@ if (process.env.NODE_ENV === 'production' && !process.env.API_KEY) {
 }
 
 export async function POST(req: NextRequest) {
+  if (!process.env.API_KEY) {
+    return NextResponse.json(
+      { 
+        error: "Service temporarily unavailable",
+        code: "SERVICE_UNAVAILABLE"
+      },
+      { status: 503 }
+    );
+  }
+
   try {
     const json = await req.json();
     const input = recommendationInputSchema.parse(json);
