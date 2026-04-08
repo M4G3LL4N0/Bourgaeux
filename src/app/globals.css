@@ -15,8 +15,13 @@
   .card {
     @apply rounded-2xl border border-white/10 bg-gradient-to-b from-white/5 to-white/[0.02] backdrop-blur-sm p-6 shadow-xl;
   }
-  .hover-orange-glow {
-    @apply transition-all duration-300 hover:shadow-[0_8px_30px_rgba(255,125,69,0.3)];
+  :root {
+    --orange-glow-intensities: 0.3;
+  }
+  .hover-orange-glow {transition: all 0.3s ease;}
+  .hover-orange-glow:hover {
+    --glow-intensity: var(--orange-glow-intensities);
+    box-shadow: 0 8px 30px rgba(255, 125, 69, var(--glow-intensity));
   }
   
   .btn-primary {
@@ -39,7 +44,9 @@
     @apply text-3xl font-semibold tracking-tight sm:text-4xl;
   }
   .feature-card {
-    @apply flex flex-col gap-4 rounded-2xl border border-white/10 bg-gradient-to-b from-white/5 to-white/[0.02] backdrop-blur-sm p-6 shadow-xl transition-all hover:border-white/20 hover-orange-glow;
+    @apply flex flex-col gap-4 rounded-2xl border border-white/10 bg-gradient-to-b from-white/5 to-white/[0.02] backdrop-blur-sm p-6 shadow-xl transition-all hover:border-white/20;
+    --orange-glow-intensities: 0.1;
+    @apply hover-orange-glow;
   }
   .testimonial-card {
     @apply flex flex-col gap-4 rounded-2xl border border-white/10 bg-gradient-to-b from-white/5 to-white/[0.02] backdrop-blur-sm p-6 shadow-xl;
