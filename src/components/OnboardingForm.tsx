@@ -33,6 +33,7 @@ export default function OnboardingForm() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<ApiResult | null>(null);
   const [error, setError] = useState("");
+  const [currentStep, setCurrentStep] = useState(0);
 
   function updateField(name: keyof typeof initialState, value: string) {
     setForm((prev) => ({ ...prev, [name]: value }));
@@ -81,6 +82,115 @@ export default function OnboardingForm() {
         </div>
 
         <form onSubmit={handleSubmit} className="grid gap-4">
+          <div className="mb-6">
+            <div className="flex gap-2">
+              {['Basics', 'Preferences', 'Details'].map((step, index) => (
+                <button
+                  type="button"
+                  onClick={() => setCurrentStep(index)}
+                  className={`flex-1 rounded-lg py-2 text-sm font-medium ${
+                    currentStep === index
+                      ? 'bg-[#FF7D45]/10 text-[#FF7D45]'
+                      : 'bg-white/5 text-white/50 hover:bg-white/10'
+                  } transition-colors`}
+                >
+                  {step}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {currentStep === 0 && (
+            <>
+              <Input
+                label="City"
+                placeholder="Los Angeles"
+                value={form.city}
+                onChange={(value) => updateField("city", value)}
+              />
+              <Input
+                label="Your vibe"
+                placeholder="curious, upscale, spontaneous, social"
+                value={form.vibe}
+                onChange={(value) => updateField("vibe", value)}
+              />
+            </>
+          )}
+
+          {currentStep === 1 && (
+            <>
+              <Textarea
+                label="Food preferences"
+                placeholder="Sushi, steakhouses, Mediterranean, brunch, dessert spots"
+                value={form.foodPreferences}
+                onChange={(value) => updateField("foodPreferences", value)}
+              />
+              <Textarea
+                label="Drink preferences"
+                placeholder="Cocktail lounges, espresso bars, wine bars, mocktails"
+                value={form.drinkPreferences}
+                onChange={(value) => updateField("drinkPreferences", value)}
+              />
+              <Textarea
+                label="Entertainment preferences"
+                placeholder="Live music, rooftops, comedy, museums, films, nightlife"
+                value={form.entertainmentPreferences}
+                onChange={(value) => updateField("entertainmentPreferences", value)}
+              />
+            </>
+          )}
+
+          {currentStep === 2 && (
+            <>
+              <Textarea
+                label="Lifestyle preferences"
+                placeholder="Luxury wellness, beach days, design hotels, social dining, curated experiences"
+                value={form.lifestylePreferences}
+                onChange={(value) => updateField("lifestylePreferences", value)}
+              />
+              <Input
+                label="Budget"
+                placeholder="$, $$, $$$ or mixed"
+                value={form.budget}
+                onChange={(value) => updateField("budget", value)}
+              />
+              <Textarea
+                label="Dislikes / avoid"
+                placeholder="Crowded clubs, dive bars, chain restaurants, overly touristy spots"
+                value={form.dislikes}
+                onChange={(value) => updateField("dislikes", value)}
+              />
+            </>
+          )}
+
+          <div className="flex justify-between mt-6">
+            {currentStep > 0 && (
+              <button
+                type="button"
+                onClick={() => setCurrentStep(currentStep - 1)}
+                className="btn-secondary"
+              >
+                Back
+              </button>
+            )}
+            {currentStep < 2 ? (
+              <button
+                type="button"
+                onClick={() => setCurrentStep(currentStep + 1)}
+                className="btn-primary"
+              >
+                Next
+              </button>
+            ) : (
+              <button
+                type="submit"
+                disabled={loading}
+                className="btn-primary"
+              >
+                {loading ? 'Expanding your life...' : 'Get recommendations'}
+              </button>
+            )}
+          </div>
           <Input
             label="City"
             placeholder="Los Angeles"
