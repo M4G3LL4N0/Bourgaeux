@@ -721,3 +721,20 @@
 +- do not redesign the UI
 +- do not add features
 +- return exact code edits only
+
+# 2026-04-08 01:12:28.743444
++Venture: bourgaeux
++State: scaling
++Lane: swarm
++
++Current mission:
++- expand product depth
++- improve dashboard/features
++- ship incremental release
++
++Rules:
++- make meaningful progress
++- preserve build stability
++- fix root causes
++- prefer deploy-worthy output
++- avoid tiny cosmetic-only changes unless bundled with stronger progress
