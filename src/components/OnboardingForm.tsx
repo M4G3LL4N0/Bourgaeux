@@ -2,73 +2,38 @@
 
 import { useState } from "react";
 
+type FormState = {
+  budget: string;
+  region: string;
+  timeline: string;
+  style: string;
+};
+
 type Recommendation = {
-  title: string;
-  category: string;
-  reason: string;
-  nextStep: string;
-};
-
-type ApiResult = {
-  profileSummary: string;
-  blindSpots: string[];
-  recommendations: Recommendation[];
-  socialAngle: string[];
-  upgradePath: string[];
-};
-
-const initialState = {
-  city: "",
-  vibe: "",
-  foodPreferences: "",
-  drinkPreferences: "",
-  entertainmentPreferences: "",
-  lifestylePreferences: "",
-  budget: "",
-  dislikes: "",
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  price?: string;
 };
 
 export default function OnboardingForm() {
-  const [form, setForm] = useState(initialState);
+  const [form, setForm] = useState<FormState>({
+    budget: "",
+    region: "",
+    timeline: "",
+    style: "",
+  });
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<ApiResult | null>(null);
   const [error, setError] = useState("");
-  const [currentStep, setCurrentStep] = useState(0);
-
-  function updateField(name: keyof typeof initialState, value: string) {
-    setForm((prev) => ({ ...prev, [name]: value }));
-  }
+  const [results, setResults] = useState<Recommendation[]>([]);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    
-    // Basic form validation
-    if (!form.city || !form.vibe) {
-      setError("Please fill in at least City and Vibe fields");
-      return;
-    }
-
     setLoading(true);
     setError("");
-    setResult(null);
 
     try {
-      const res = await fetch("/api/recommend", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...form,
-          // Ensure required fields have minimum length
-          city: form.city.trim(),
-          vibe: form.vibe.trim()
-        }),
-      });
-
-      if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(errorData.error || "Failed to get recommendations");
-      }
+      const res = await fetch("/api/recommendations", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -76,389 +41,116 @@ export default function OnboardingForm() {
         body: JSON.stringify(form),
       });
 
-      const data = await res.json();
-
       if (!res.ok) {
-        throw new Error(data?.error || "Failed to generate recommendations.");
+        const errorData = await res.json().catch(() => ({}));
+        throw new Error(errorData.error || "Failed to get recommendations");
       }
 
-      setResult(data);
+      const data = await res.json().catch(() => ({}));
+      const nextResults = Array.isArray(data?.recommendations)
+        ? data.recommendations
+        : Array.isArray(data?.results)
+          ? data.results
+          : [];
+
+      setResults(nextResults);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong.");
+      setError(err instanceof Error ? err.message : "Something went wrong");
+      setResults([]);
     } finally {
       setLoading(false);
     }
   }
 
+  function updateField<K extends keyof FormState>(key: K, value: FormState[K]) {
+    setForm((prev) => ({ ...prev, [key]: value }));
+  }
+
   return (
-    <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
-      <section className="rounded-3xl border border-white/10 bg-white/[0.04] p-6">
-        <div className="mb-5">
-          <h3 className="text-xl font-semibold text-white">
-            Build your Bourgaeux profile
-          </h3>
-          <p className="mt-2 text-sm leading-6 text-white/60">
-            Tell Bourgaeux how you currently live so it can show you what you are
-            missing next.
-          </p>
+    <div className="w-full">
+      <form onSubmit={handleSubmit} className="grid gap-4">
+        <div className="grid gap-2">
+          <label htmlFor="budget" className="text-sm font-medium">
+            Budget
+          </label>
+          <input
+            id="budget"
+            value={form.budget}
+            onChange={(e) => updateField("budget", e.target.value)}
+            className="w-full rounded-xl border border-black/10 px-4 py-3 outline-none"
+            placeholder="Your budget"
+          />
         </div>
 
-        <form onSubmit={handleSubmit} className="grid gap-4">
-          <div className="mb-6">
-            <div className="flex gap-2">
-              {['Basics', 'Preferences', 'Details'].map((step, index) => (
-                <button
-                  type="button"
-                  onClick={() => setCurrentStep(index)}
-                  className={`flex-1 rounded-lg py-2 text-sm font-medium ${
-                    currentStep === index
-                      ? 'bg-[#FF7D45]/10 text-[#FF7D45]'
-                      : 'bg-white/5 text-white/50 hover:bg-white/10'
-                  } transition-colors`}
-                >
-                  {step}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {currentStep === 0 && (
-            <>
-              <Input
-                label="City"
-                placeholder="Los Angeles"
-                value={form.city}
-                onChange={(value) => updateField("city", value)}
-              />
-              <Input
-                label="Your vibe"
-                placeholder="curious, upscale, spontaneous, social"
-                value={form.vibe}
-                onChange={(value) => updateField("vibe", value)}
-              />
-            </>
-          )}
-
-          {currentStep === 1 && (
-            <>
-              <Textarea
-                label="Food preferences"
-                placeholder="Sushi, steakhouses, Mediterranean, brunch, dessert spots"
-                value={form.foodPreferences}
-                onChange={(value) => updateField("foodPreferences", value)}
-              />
-              <Textarea
-                label="Drink preferences"
-                placeholder="Cocktail lounges, espresso bars, wine bars, mocktails"
-                value={form.drinkPreferences}
-                onChange={(value) => updateField("drinkPreferences", value)}
-              />
-              <Textarea
-                label="Entertainment preferences"
-                placeholder="Live music, rooftops, comedy, museums, films, nightlife"
-                value={form.entertainmentPreferences}
-                onChange={(value) => updateField("entertainmentPreferences", value)}
-              />
-            </>
-          )}
-
-          {currentStep === 2 && (
-            <>
-              <Textarea
-                label="Lifestyle preferences"
-                placeholder="Luxury wellness, beach days, design hotels, social dining, curated experiences"
-                value={form.lifestylePreferences}
-                onChange={(value) => updateField("lifestylePreferences", value)}
-              />
-              <Input
-                label="Budget"
-                placeholder="$, $$, $$$ or mixed"
-                value={form.budget}
-                onChange={(value) => updateField("budget", value)}
-              />
-              <Textarea
-                label="Dislikes / avoid"
-                placeholder="Crowded clubs, dive bars, chain restaurants, overly touristy spots"
-                value={form.dislikes}
-                onChange={(value) => updateField("dislikes", value)}
-              />
-            </>
-          )}
-
-          <div className="flex justify-between mt-6">
-            {currentStep > 0 && (
-              <button
-                type="button"
-                onClick={() => setCurrentStep(currentStep - 1)}
-                className="btn-secondary"
-              >
-                Back
-              </button>
-            )}
-            {currentStep < 2 ? (
-              <button
-                type="button"
-                onClick={() => setCurrentStep(currentStep + 1)}
-                className="btn-primary"
-              >
-                Next
-              </button>
-            ) : (
-              <button
-                type="submit"
-                disabled={loading}
-                className={`btn-primary ${loading ? 'loading' : ''}`}
-              >
-                {loading ? (
-                  <span className="flex items-center gap-2">
-                    <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></span>
-                    Generating recommendations...
-                  </span>
-                ) : (
-                  'Get personalized recommendations'
-                )}
-              </button>
-            )}
-          </div>
-          <Input
-            label="City"
-            placeholder="Los Angeles"
-            value={form.city}
-            onChange={(value) => updateField("city", value)}
+        <div className="grid gap-2">
+          <label htmlFor="region" className="text-sm font-medium">
+            Region
+          </label>
+          <input
+            id="region"
+            value={form.region}
+            onChange={(e) => updateField("region", e.target.value)}
+            className="w-full rounded-xl border border-black/10 px-4 py-3 outline-none"
+            placeholder="Preferred region"
           />
+        </div>
 
-          <Input
-            label="Your vibe"
-            placeholder="curious, upscale, spontaneous, social"
-            value={form.vibe}
-            onChange={(value) => updateField("vibe", value)}
+        <div className="grid gap-2">
+          <label htmlFor="timeline" className="text-sm font-medium">
+            Timeline
+          </label>
+          <input
+            id="timeline"
+            value={form.timeline}
+            onChange={(e) => updateField("timeline", e.target.value)}
+            className="w-full rounded-xl border border-black/10 px-4 py-3 outline-none"
+            placeholder="Move-in timeline"
           />
-          <button 
-            type="submit" 
-            className={`btn-primary mt-6 ${loading ? 'loading' : ''}`}
-            disabled={loading}
+        </div>
+
+        <div className="grid gap-2">
+          <label htmlFor="style" className="text-sm font-medium">
+            Style
+          </label>
+          <input
+            id="style"
+            value={form.style}
+            onChange={(e) => updateField("style", e.target.value)}
+            className="w-full rounded-xl border border-black/10 px-4 py-3 outline-none"
+            placeholder="Style preferences"
+          />
+        </div>
+
+        <button
+          type="submit"
+          disabled={loading}
+          className="rounded-xl bg-black px-5 py-3 text-white disabled:opacity-60"
+        >
+          {loading ? "Loading..." : "Get Recommendations"}
+        </button>
+
+        {error ? <p className="text-sm text-red-600">{error}</p> : null}
+      </form>
+
+      <div className="mt-6 grid gap-4">
+        {results.map((item, index) => (
+          <div
+            key={`${item.title ?? "recommendation"}-${index}`}
+            className="rounded-2xl border border-black/10 p-4"
           >
-            {loading ? (
-              <div className="flex items-center gap-2">
-                <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
-                <span>Finding Recommendations...</span>
-              </div>
-            ) : (
-              'Get Recommendations'
-            )}
-          </button>
-
-          <Textarea
-            label="Food preferences"
-            placeholder="Sushi, steakhouses, Mediterranean, brunch, dessert spots"
-            value={form.foodPreferences}
-            onChange={(value) => updateField("foodPreferences", value)}
-          />
-
-          <Textarea
-            label="Drink preferences"
-            placeholder="Cocktail lounges, espresso bars, wine bars, mocktails"
-            value={form.drinkPreferences}
-            onChange={(value) => updateField("drinkPreferences", value)}
-          />
-
-          <Textarea
-            label="Entertainment preferences"
-            placeholder="Live music, rooftops, comedy, museums, films, nightlife"
-            value={form.entertainmentPreferences}
-            onChange={(value) => updateField("entertainmentPreferences", value)}
-          />
-
-          <Textarea
-            label="Lifestyle preferences"
-            placeholder="Luxury wellness, beach days, design hotels, social dining, curated experiences"
-            value={form.lifestylePreferences}
-            onChange={(value) => updateField("lifestylePreferences", value)}
-          />
-
-          <Input
-            label="Budget"
-            placeholder="$, $$, $$$ or mixed"
-            value={form.budget}
-            onChange={(value) => updateField("budget", value)}
-          />
-
-          <Textarea
-            label="Dislikes / avoid"
-            placeholder="Crowded clubs, dive bars, chain restaurants, overly touristy spots"
-            value={form.dislikes}
-            onChange={(value) => updateField("dislikes", value)}
-          />
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="mt-2 btn-primary px-5 py-3 text-sm disabled:cursor-not-allowed disabled:opacity-60 transition-opacity"
-          >
-            {loading ? "Expanding your life..." : "Generate recommendations"}
-          </button>
-
-          {error ? (
-            <div className="rounded-lg bg-red-900/20 border border-red-500/30 p-4 mt-4">
-              <p className="text-red-300 font-medium">{error}</p>
-              {error.includes('unavailable') && (
-                <p className="text-sm text-red-200/80 mt-1">
-                  Our team has been notified and will resolve this shortly.
-                </p>
-              )}
-            </div>
-          ) : null}
-        </form>
-      </section>
-
-      <section className="rounded-3xl border border-white/10 bg-white/[0.04] p-6">
-        {!result ? (
-          <div>
-            <h3 className="text-xl font-semibold text-white">What Bourgaeux returns</h3>
-            <p className="mt-3 text-sm leading-6 text-white/60">
-              Bourgaeux is not trying to help users search harder. It is trying
-              to help them live better through recommendation, taste expansion,
-              and blind-spot detection.
-            </p>
+            <h3 className="text-lg font-semibold">{item.title ?? "Recommendation"}</h3>
+            {item.subtitle ? (
+              <p className="mt-1 text-sm text-neutral-600">{item.subtitle}</p>
+            ) : null}
+            {item.description ? (
+              <p className="mt-3 text-sm text-neutral-700">{item.description}</p>
+            ) : null}
+            {item.price ? (
+              <p className="mt-3 text-sm font-medium">{item.price}</p>
+            ) : null}
           </div>
-        ) : (
-          <div className="space-y-6">
-            <div>
-              <p className="text-xs uppercase tracking-[0.22em] text-white/45">
-                Profile summary
-              </p>
-              <p className="mt-2 text-sm leading-6 text-white/80">
-                {result.profileSummary}
-              </p>
-            </div>
-
-            <div>
-              <p className="text-xs uppercase tracking-[0.22em] text-white/45">
-                Blind spots
-              </p>
-              <ul className="mt-3 space-y-2">
-                {result.blindSpots.map((spot) => (
-                  <li
-                    key={spot}
-                    className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80"
-                  >
-                    {spot}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <p className="text-xs uppercase tracking-[0.22em] text-white/45">
-                Recommendations
-              </p>
-              <div className="mt-3 grid gap-3">
-                {result.recommendations.map((item) => (
-                  <div
-                    key={`${item.category}-${item.title}`}
-                    className={`rounded-2xl border border-white/10 bg-black/30 p-4 ${loading ? 'opacity-60 cursor-not-allowed' : 'hover:border-white/20 hover:bg-white/[0.03]'} transition-all`}
-                  >
-                    <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                      <h4 className="text-lg font-semibold text-white">{item.title}</h4>
-                      <span className="rounded-full border border-[#d4b06a]/40 bg-[#d4b06a]/10 px-3 py-1 text-xs uppercase tracking-[0.2em] text-[#e8c98a]">
-                        {item.category}
-                      </span>
-                    </div>
-                    <p className="mt-3 text-sm leading-6 text-white/75">
-                      {item.reason}
-                    </p>
-                    <p className="mt-3 text-sm text-white/85">
-                      <span className="font-semibold text-[#e8c98a]">Next move:</span>{" "}
-                      {item.nextStep}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <p className="text-xs uppercase tracking-[0.22em] text-white/45">
-                Social angle
-              </p>
-              <ul className="mt-3 space-y-2">
-                {result.socialAngle.map((item) => (
-                  <li
-                    key={item}
-                    className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80"
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <p className="text-xs uppercase tracking-[0.22em] text-white/45">
-                Upgrade path
-              </p>
-              <ul className="mt-3 space-y-2">
-                {result.upgradePath.map((item) => (
-                  <li
-                    key={item}
-                    className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80"
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        )}
-      </section>
+        ))}
+      </div>
     </div>
-  );
-}
-
-function Input({
-  label,
-  placeholder,
-  value,
-  onChange,
-}: {
-  label: string;
-  placeholder: string;
-  value: string;
-  onChange: (value: string) => void;
-}) {
-  return (
-    <label className="grid gap-2">
-      <span className="text-sm font-medium text-white/80">{label}</span>
-      <input
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder}
-        className="rounded-2xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white placeholder:text-white/30 hover:border-white/20 transition-colors"
-      />
-    </label>
-  );
-}
-
-function Textarea({
-  label,
-  placeholder,
-  value,
-  onChange,
-}: {
-  label: string;
-  placeholder: string;
-  value: string;
-  onChange: (value: string) => void;
-}) {
-  return (
-    <label className="grid gap-2">
-      <span className="text-sm font-medium text-white/80">{label}</span>
-      <textarea
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder}
-        rows={4}
-        className="rounded-2xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white placeholder:text-white/30 hover:border-white/20 transition-colors"
-      />
-    </label>
   );
 }

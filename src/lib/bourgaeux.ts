@@ -1,138 +1,132 @@
 export type Recommendation = {
   title: string;
-  category: string;
-  reason: string;
-  nextStep: string;
-  city?: string;
-  recommendedBy?: string;
-  saved?: boolean;
-  likes?: number;
-  tags?: string[];
+  subtitle?: string;
+  description: string;
+  price?: string;
   budget?: string;
-  error?: string;
-};
-
-export type ApiError = {
-  error: string;
-  code: string;
-};
-
-export type RecommendationResponse = {
-  profileSummary: string;
-  blindSpots: string[];
-  recommendations: Recommendation[];
-  socialAngle: string[];
-  upgradePath: string[];
-  error?: string;
+  city?: string;
+  reason?: string;
+  nextStep?: string;
+  recommendedBy?: string;
+  tags?: string[];
+  likes?: number;
+  category?: string;
 };
 
 export type RecommendationInput = {
-  city: string;
-  vibe: string;
-  foodPreferences: string;
-  drinkPreferences: string;
-  entertainmentPreferences: string;
-  lifestylePreferences: string;
-  budget: string;
-  dislikes: string;
+  budget?: string;
+  region?: string;
+  timeline?: string;
+  style?: string;
+  city?: string;
+  goals?: string[];
+  constraints?: string[];
 };
+
+export type RecommendationRequest = RecommendationInput;
 
 export type RecommendationResponse = {
   profileSummary: string;
   blindSpots: string[];
   recommendations: Recommendation[];
-  socialAngle: string[];
-  upgradePath: string[];
+  socialAngle?: string[];
 };
 
 export const recommendationInputSchema = {
   parse(input: unknown): RecommendationInput {
-    if (!input || typeof input !== "object") {
-      throw new Error("Invalid request body.");
-    }
-
-    const data = input as Record<string, unknown>;
+    const value = (input ?? {}) as Record<string, unknown>;
 
     return {
-      city: readString(data.city, "city"),
-      vibe: readString(data.vibe, "vibe"),
-      foodPreferences: readString(data.foodPreferences, "foodPreferences"),
-      drinkPreferences: readString(data.drinkPreferences, "drinkPreferences"),
-      entertainmentPreferences: readString(
-        data.entertainmentPreferences,
-        "entertainmentPreferences"
-      ),
-      lifestylePreferences: readString(
-        data.lifestylePreferences,
-        "lifestylePreferences"
-      ),
-      budget: readString(data.budget, "budget"),
-      dislikes: readString(data.dislikes, "dislikes"),
+      budget: typeof value.budget === "string" ? value.budget : "",
+      region: typeof value.region === "string" ? value.region : "",
+      timeline: typeof value.timeline === "string" ? value.timeline : "",
+      style: typeof value.style === "string" ? value.style : "",
+      city: typeof value.city === "string" ? value.city : "",
+      goals: Array.isArray(value.goals)
+        ? value.goals.filter((item): item is string => typeof item === "string")
+        : [],
+      constraints: Array.isArray(value.constraints)
+        ? value.constraints.filter((item): item is string => typeof item === "string")
+        : [],
     };
   },
 };
 
-function readString(value: unknown, field: string): string {
-  if (typeof value !== "string" || value.trim().length === 0) {
-    throw new Error(`Invalid field: ${field}`);
-  }
-
-  return value.trim();
-}
-
 export async function generateLifestyleExpansion(
   input: RecommendationInput
 ): Promise<RecommendationResponse> {
+  const budget = input.budget?.trim() || "$$";
+  const region = input.region?.trim() || "Open";
+  const timeline = input.timeline?.trim() || "Open";
+  const style = input.style?.trim() || "Balanced";
+  const city = input.city?.trim() || "Your City";
+  const goals = input.goals?.filter(Boolean) ?? [];
+  const constraints = input.constraints?.filter(Boolean) ?? [];
+
+  const goalLine = goals.length > 0 ? ` Goals: ${goals.join(", ")}.` : "";
+  const constraintLine =
+    constraints.length > 0 ? ` Constraints: ${constraints.join(", ")}.` : "";
+
   return {
-    profileSummary: `You have a defined taste profile in ${input.city} with a ${input.vibe} vibe, but there are still strong opportunities to expand across food, drink, entertainment, and lifestyle.`,
+    profileSummary: `Targeting ${region} with a ${style.toLowerCase()} preference, ${timeline.toLowerCase()} timeline, and ${budget.toLowerCase()} budget posture in ${city}.${goalLine}${constraintLine}`,
     blindSpots: [
-      "You may be repeating familiar choices instead of exploring adjacent high-fit experiences.",
-      "Your current entertainment mix likely misses more intimate and curated formats.",
-      "Your lifestyle choices could benefit from more intentional sequencing of places and experiences.",
+      "Clarify whether neighborhood priority outweighs square footage.",
+      "Define non-negotiables before comparing options.",
+      "Confirm financing and move timeline before shortlisting.",
     ],
     recommendations: [
       {
-        title: "Curated tasting night",
-        category: "Food",
-        reason:
-          "Guided tasting formats expand your palate faster than repeating the same restaurant patterns.",
-        nextStep:
-          "Try an omakase, prix-fixe, chef counter, or regional tasting dinner this week.",
+        title: "Prime-fit shortlist",
+        subtitle: `${region} · ${style}`,
+        description:
+          "Start with properties that best match your stated region and style preferences, then narrow by commute, layout, and upside.",
+        price: budget,
+        budget,
+        city,
+        reason: "This fits your tastes perfectly",
+        nextStep: "Reserve a table",
+        recommendedBy: "Bourgaeux",
+        tags: [region, style, "Top Match"],
+        likes: 12,
+        category: "Top Match",
       },
       {
-        title: "Refined lounge exploration",
-        category: "Drink",
-        reason:
-          "A more curated atmosphere may fit your profile better than generic high-volume nightlife.",
-        nextStep:
-          "Choose one design-forward cocktail, wine, or zero-proof lounge and stay long enough to understand the space.",
+        title: "Value-upside shortlist",
+        subtitle: "Best efficiency path",
+        description:
+          "Compare options slightly outside your first-choice zone to capture better value, inventory depth, or future upside.",
+        price: budget,
+        budget,
+        city,
+        reason: "Strong value relative to your priorities",
+        nextStep: "Compare neighborhood options",
+        recommendedBy: "Bourgaeux",
+        tags: ["Value", timeline, "Upside"],
+        likes: 8,
+        category: "Value",
       },
       {
-        title: "Smaller-format culture night",
-        category: "Entertainment",
-        reason:
-          "Your profile suggests you may respond well to intimate environments with higher signal and less noise.",
-        nextStep:
-          "Try a jazz room, listening bar, art-house screening, live comedy room, or gallery evening.",
+        title: "Fast-execution shortlist",
+        subtitle: `${timeline} timeline`,
+        description:
+          "Prioritize listings with cleaner decision paths, stronger readiness, and lower friction if speed matters most.",
+        price: budget,
+        budget,
+        city,
+        reason: "Best match for your timeline",
+        nextStep: "Shortlist and move quickly",
+        recommendedBy: "Bourgaeux",
+        tags: ["Fast Move", city, "Ready"],
+        likes: 5,
+        category: "Fast Track",
       },
-      {
-        title: "Intentional lifestyle circuit",
-        category: "Lifestyle",
-        reason:
-          "Taste expands more effectively when experiences are sequenced into a full-day flow.",
-        nextStep:
-          "Build one day around coffee, movement, food, design, and evening entertainment in the same neighborhood.",
-      },
     ],
-    socialAngle: [
-      "Your taste profile can evolve into a public identity based on what you actually do in real life.",
-      "Recommendations can become a personalized social feed shaped by similar taste profiles.",
-      "Blind spots can become recurring prompts that drive exploration and sharing.",
-    ],
-    upgradePath: [
-      "Refine your preferences with more specific examples.",
-      "Log completed experiences and ratings.",
-      "Build a living taste profile that improves future recommendations.",
-    ],
+    socialAngle: ["Great for group outings"],
   };
+}
+
+export async function getRecommendations(
+  input: RecommendationRequest
+): Promise<RecommendationResponse> {
+  return generateLifestyleExpansion(input);
 }
