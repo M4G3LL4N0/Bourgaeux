@@ -185,9 +185,16 @@ export default function OnboardingForm() {
               <button
                 type="submit"
                 disabled={loading}
-                className="btn-primary"
+                className={`btn-primary ${loading ? 'loading' : ''}`}
               >
-                {loading ? 'Expanding your life...' : 'Get recommendations'}
+                {loading ? (
+                  <span className="flex items-center gap-2">
+                    <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></span>
+                    Generating recommendations...
+                  </span>
+                ) : (
+                  'Get personalized recommendations'
+                )}
               </button>
             )}
           </div>
@@ -269,7 +276,16 @@ export default function OnboardingForm() {
             {loading ? "Expanding your life..." : "Generate recommendations"}
           </button>
 
-          {error ? <p className="text-sm text-red-300">{error}</p> : null}
+          {error ? (
+            <div className="rounded-lg bg-red-900/20 border border-red-500/30 p-4 mt-4">
+              <p className="text-red-300 font-medium">{error}</p>
+              {error.includes('unavailable') && (
+                <p className="text-sm text-red-200/80 mt-1">
+                  Our team has been notified and will resolve this shortly.
+                </p>
+              )}
+            </div>
+          ) : null}
         </form>
       </section>
 
