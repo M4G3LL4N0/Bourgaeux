@@ -28,11 +28,15 @@
     @apply rounded-xl bg-gradient-to-r from-[#FF7D45] via-[#FF5E62] to-[#FF3D71] px-6 py-3 font-medium text-white shadow-lg hover-orange-glow;
   }
   .btn-primary.loading {
-    @apply pointer-events-none brightness-90 relative;
+    @apply pointer-events-none brightness-90 relative overflow-hidden;
   }
   .btn-primary.loading::after {
     content: "";
     @apply absolute w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin;
+  }
+  .btn-primary.loading::before {
+    content: "";
+    @apply absolute inset-0 bg-gradient-to-r from-[#FF7D45]/30 via-[#FF5E62]/30 to-[#FF3D71]/30 animate-pulse;
   }
   .btn-secondary {
     @apply rounded-xl border border-white/10 bg-white/5 px-6 py-3 font-medium text-white transition-all;

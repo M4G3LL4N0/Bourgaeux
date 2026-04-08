@@ -35,7 +35,7 @@ export default function HomePage() {
             </div>
 
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              <div className="feature-card">
+              <div className="feature-card group">
                 <div className="flex items-center gap-3">
                   <div className="h-10 w-10 rounded-full bg-gradient-to-r from-[#FF7D45] via-[#FF5E62] to-[#FF3D71]"></div>
                   <div>
@@ -51,6 +51,11 @@ export default function HomePage() {
                     <span className="text-xs px-2 py-1 rounded-full bg-white/10">Cocktails</span>
                     <span className="text-xs px-2 py-1 rounded-full bg-white/10">Live Music</span>
                   </div>
+                </div>
+                <div className="mt-4 pt-4 border-t border-white/10 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <button className="text-xs text-[#FF7D45] hover:text-[#FF5E62] transition-colors">
+                    Save to profile
+                  </button>
                 </div>
               </div>
 
