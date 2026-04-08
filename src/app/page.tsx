@@ -126,10 +126,11 @@ export default function HomePage() {
                   See what's new from your network and trending in your city.
                 </p>
               </div>
-              <div className="mt-4 pt-4 border-t border-white/10 opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="mt-4 pt-4 border-t border-white/10 opacity-0 group-hover:opacity-100 transition-opacity flex justify-between items-center">
                 <button className="text-xs text-[#FF7D45] hover:text-[#FF5E62] transition-colors">
                   View Updates
                 </button>
+                <span className="text-xs text-white/60">12 new</span>
               </div>
             </div>
             <div className="feature-card">
