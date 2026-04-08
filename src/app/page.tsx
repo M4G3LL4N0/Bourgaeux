@@ -35,7 +35,8 @@ export default function HomePage() {
             </div>
 
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              <div className="feature-card group">
+              <div className="feature-card group relative overflow-hidden">
+                <div className="absolute -right-10 -top-10 h-24 w-24 rounded-full bg-[#FF7D45]/10 blur-xl"></div>
                 <div className="flex items-center gap-3">
                   <div className="h-10 w-10 rounded-full bg-gradient-to-r from-[#FF7D45] via-[#FF5E62] to-[#FF3D71]"></div>
                   <div>
@@ -46,16 +47,18 @@ export default function HomePage() {
                 <div className="mt-4">
                   <h4 className="font-semibold">Bar Marilou</h4>
                   <p className="text-sm text-white/80 mt-1">Luxury cocktail bar with Parisian vibes and live jazz</p>
-                  <div className="mt-3 flex gap-2">
+                  <div className="mt-3 flex flex-wrap gap-2">
                     <span className="text-xs px-2 py-1 rounded-full bg-white/10">$$$</span>
                     <span className="text-xs px-2 py-1 rounded-full bg-white/10">Cocktails</span>
                     <span className="text-xs px-2 py-1 rounded-full bg-white/10">Live Music</span>
+                    <span className="text-xs px-2 py-1 rounded-full bg-white/10">Date Night</span>
                   </div>
                 </div>
-                <div className="mt-4 pt-4 border-t border-white/10 opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="mt-4 pt-4 border-t border-white/10 opacity-0 group-hover:opacity-100 transition-opacity flex justify-between items-center">
                   <button className="text-xs text-[#FF7D45] hover:text-[#FF5E62] transition-colors">
                     Save to profile
                   </button>
+                  <span className="text-xs text-white/60">3 friends like this</span>
                 </div>
               </div>
 
