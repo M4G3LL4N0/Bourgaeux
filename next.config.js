@@ -2,7 +2,6 @@
 const nextConfig = {
   experimental: {
     optimizePackageImports: ['lucide-react'],
-    serverActions: true,
   },
   typescript: {
     ignoreBuildErrors: false,
