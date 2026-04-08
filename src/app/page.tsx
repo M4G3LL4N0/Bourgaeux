@@ -1,4 +1,16 @@
+import { useEffect } from 'react';
 import Hero from "../components/Hero";
+
+// Remove loading screen when page is fully loaded
+if (typeof window !== 'undefined') {
+  window.addEventListener('load', () => {
+    const loadingScreen = document.getElementById('loading-screen');
+    if (loadingScreen) {
+      loadingScreen.style.opacity = '0';
+      setTimeout(() => loadingScreen.remove(), 300);
+    }
+  });
+}
 import FutureFeedPreview from "../components/FutureFeedPreview";
 import OnboardingForm from "../components/OnboardingForm";
 
