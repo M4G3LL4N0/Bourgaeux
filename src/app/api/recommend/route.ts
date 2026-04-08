@@ -4,6 +4,10 @@ import {
   recommendationInputSchema,
 } from "../../../lib/bourgaeux";
 
+if (process.env.NODE_ENV === 'production' && !process.env.API_KEY) {
+  console.error('Missing API_KEY environment variable');
+}
+
 export async function POST(req: NextRequest) {
   try {
     const json = await req.json();

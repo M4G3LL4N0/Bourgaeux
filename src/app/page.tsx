@@ -145,7 +145,16 @@ export default function HomePage() {
                 Join Bourgaeux today and start discovering the best experiences in your city.
               </p>
               <div className="mt-6">
-                <button className="btn-primary">
+                <button 
+                  className="btn-primary" 
+                  onClick={(e) => {
+                    e.currentTarget.classList.add('loading');
+                    // Simulate async operation
+                    setTimeout(() => {
+                      e.currentTarget.classList.remove('loading');
+                    }, 2000);
+                  }}
+                >
                   Get Started
                 </button>
               </div>

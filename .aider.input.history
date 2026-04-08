@@ -679,3 +679,45 @@
 +- keep drift low
 +- keep build stability
 +- bias toward something worth shipping
+
+# 2026-04-08 00:12:56.213619
++Make one useful improvement to this venture.
++
++Rules:
++- improve product or UI meaningfully
++- keep drift low
++- keep build stability
++- bias toward something worth shipping
+
+# 2026-04-08 00:12:56.213840
++Make one useful improvement to this venture.
++
++Rules:
++- improve product or UI meaningfully
++- keep drift low
++- keep build stability
++- bias toward something worth shipping
+
+# 2026-04-08 00:16:24.131134
++Fix the current build failure only.
++
++Failure type: env_missing
++
++Rules:
++- minimal edits only
++- target only files related to the build failure
++- do not redesign the UI
++- do not add features
++- return exact code edits only
+
+# 2026-04-08 00:16:24.131340
++Fix the current build failure only.
++
++Failure type: env_missing
++
++Rules:
++- minimal edits only
++- target only files related to the build failure
++- do not redesign the UI
++- do not add features
++- return exact code edits only
