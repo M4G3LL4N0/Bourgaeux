@@ -21,7 +21,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-3">
+          <div className="grid gap-8 md:grid-cols-3 mb-12">
             <div className="feature-card">
               <div className="feature-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-sparkles">
@@ -67,7 +67,56 @@ export default function HomePage() {
             </div>
           </div>
 
-          <OnboardingForm />
+          <div className="form-section">
+            <div className="max-w-3xl mx-auto text-center mb-8">
+              <h2 className="section-heading">
+                Ready to elevate your lifestyle?
+              </h2>
+              <p className="mt-4 text-lg text-white/80">
+                Join Bourgaeux today and start discovering the best experiences in your city.
+              </p>
+              <div className="mt-6">
+                <button className="btn-primary">
+                  Get Started
+                </button>
+              </div>
+            </div>
+
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-12">
+              <div className="testimonial-card">
+                <p className="text-white/80 italic">
+                  "Bourgaeux completely changed how I explore my city. The recommendations are spot on!"
+                </p>
+                <div className="flex items-center gap-3 mt-4">
+                  <div className="h-10 w-10 rounded-full bg-gradient-to-r from-[#FF7D45] via-[#FF5E62] to-[#FF3D71]"></div>
+                  <div>
+                    <p className="font-medium">Sarah L.</p>
+                    <p className="text-sm text-white/60">Los Angeles</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="testimonial-card">
+                <p className="text-white/80 italic">
+                  "I've discovered so many amazing places I never would have found on my own."
+                </p>
+                <div className="flex items-center gap-3 mt-4">
+                  <div className="h-10 w-10 rounded-full bg-gradient-to-r from-[#FF7D45] via-[#FF5E62] to-[#FF3D71]"></div>
+                  <div>
+                    <p className="font-medium">Michael T.</p>
+                    <p className="text-sm text-white/60">New York</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="stats-card">
+                <h3 className="text-3xl font-bold">10,000+</h3>
+                <p className="text-white/80">Experiences Discovered</p>
+              </div>
+            </div>
+
+            <OnboardingForm />
+          </div>
         </section>
       </div>
     </main>
