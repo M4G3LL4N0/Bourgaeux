@@ -55,6 +55,12 @@
     @apply hover-orange-glow hover:translate-y-[-2px];
     min-height: 220px;
   }
+  .feature-card.saved {
+    @apply border-[#FF7D45]/30;
+  }
+  .feature-card.saved .feature-content {
+    @apply opacity-90;
+  }
   
   .feature-card .feature-content {
     @apply transition-all duration-300;

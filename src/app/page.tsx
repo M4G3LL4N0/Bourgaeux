@@ -17,6 +17,62 @@ import FutureFeedPreview from "../components/FutureFeedPreview";
 import OnboardingForm from "../components/OnboardingForm";
 
 export default function HomePage() {
+  const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [form, setForm] = useState({
+    city: '',
+    vibe: '',
+    foodPreferences: '',
+    drinkPreferences: '',
+    entertainmentPreferences: '',
+    lifestylePreferences: '',
+    budget: '',
+    dislikes: ''
+  });
+
+  useEffect(() => {
+    // Load initial recommendations
+    fetchRecommendations();
+  }, []);
+
+  const fetchRecommendations = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch('/api/recommend', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json();
+      setRecommendations(data.recommendations);
+    } catch (error) {
+      console.error('Failed to fetch recommendations:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSaveRecommendation = async (rec: Recommendation) => {
+    try {
+      await fetch('/api/save', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(rec),
+      });
+      // Update local state to reflect saved status
+      setRecommendations(prev => 
+        prev.map(r => 
+          r.title === rec.title ? {...r, saved: true} : r
+        )
+      );
+    } catch (error) {
+      console.error('Failed to save recommendation:', error);
+    }
+  };
   return (
     <main className="min-h-screen p-4 sm:p-8">
       <div className="mx-auto flex max-w-6xl flex-col gap-12">
@@ -35,70 +91,37 @@ export default function HomePage() {
             </div>
 
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              <div className="feature-card group relative overflow-hidden">
-                <div className="absolute -right-10 -top-10 h-24 w-24 rounded-full bg-[#FF7D45]/10 blur-xl"></div>
-                <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-full bg-gradient-to-r from-[#FF7D45] via-[#FF5E62] to-[#FF3D71]"></div>
-                  <div>
-                    <p className="font-medium">Alexandra R.</p>
-                    <p className="text-sm text-white/60">Miami</p>
+              {recommendations?.map((rec) => (
+                <div key={rec.title} className="feature-card group relative overflow-hidden">
+                  <div className="absolute -right-10 -top-10 h-24 w-24 rounded-full bg-[#FF7D45]/10 blur-xl"></div>
+                  <div className="flex items-center gap-3">
+                    <div className="h-10 w-10 rounded-full bg-gradient-to-r from-[#FF7D45] via-[#FF5E62] to-[#FF3D71]"></div>
+                    <div>
+                      <p className="font-medium">{rec.recommendedBy || 'Bourgaeux'}</p>
+                      <p className="text-sm text-white/60">{form.city || 'Your City'}</p>
+                    </div>
+                  </div>
+                  <div className="mt-4">
+                    <h4 className="font-semibold">{rec.title}</h4>
+                    <p className="text-sm text-white/80 mt-1">{rec.reason}</p>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      <span className="text-xs px-2 py-1 rounded-full bg-white/10">{rec.budget || '$$'}</span>
+                      {rec.tags?.map(tag => (
+                        <span key={tag} className="text-xs px-2 py-1 rounded-full bg-white/10">{tag}</span>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="mt-4 pt-4 border-t border-white/10 opacity-0 group-hover:opacity-100 transition-opacity flex justify-between items-center">
+                    <button 
+                      className="text-xs text-[#FF7D45] hover:text-[#FF5E62] transition-colors"
+                      onClick={() => handleSaveRecommendation(rec)}
+                    >
+                      Save to profile
+                    </button>
+                    <span className="text-xs text-white/60">{rec.likes || 0} friends like this</span>
                   </div>
                 </div>
-                <div className="mt-4">
-                  <h4 className="font-semibold">Bar Marilou</h4>
-                  <p className="text-sm text-white/80 mt-1">Luxury cocktail bar with Parisian vibes and live jazz</p>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    <span className="text-xs px-2 py-1 rounded-full bg-white/10">$$$</span>
-                    <span className="text-xs px-2 py-1 rounded-full bg-white/10">Cocktails</span>
-                    <span className="text-xs px-2 py-1 rounded-full bg-white/10">Live Music</span>
-                    <span className="text-xs px-2 py-1 rounded-full bg-white/10">Date Night</span>
-                  </div>
-                </div>
-                <div className="mt-4 pt-4 border-t border-white/10 opacity-0 group-hover:opacity-100 transition-opacity flex justify-between items-center">
-                  <button className="text-xs text-[#FF7D45] hover:text-[#FF5E62] transition-colors">
-                    Save to profile
-                  </button>
-                  <span className="text-xs text-white/60">3 friends like this</span>
-                </div>
-              </div>
-
-              <div className="feature-card">
-                <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-full bg-gradient-to-r from-[#FF7D45] via-[#FF5E62] to-[#FF3D71]"></div>
-                  <div>
-                    <p className="font-medium">James K.</p>
-                    <p className="text-sm text-white/60">Chicago</p>
-                  </div>
-                </div>
-                <div className="mt-4">
-                  <h4 className="font-semibold">Kumiko</h4>
-                  <p className="text-sm text-white/80 mt-1">Japanese-inspired tasting menu with cocktail pairings</p>
-                  <div className="mt-3 flex gap-2">
-                    <span className="text-xs px-2 py-1 rounded-full bg-white/10">$$$$</span>
-                    <span className="text-xs px-2 py-1 rounded-full bg-white/10">Omakase</span>
-                    <span className="text-xs px-2 py-1 rounded-full bg-white/10">Date Night</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="feature-card">
-                <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-full bg-gradient-to-r from-[#FF7D45] via-[#FF5E62] to-[#FF3D71]"></div>
-                  <div>
-                    <p className="font-medium">Sophie M.</p>
-                    <p className="text-sm text-white/60">Austin</p>
-                  </div>
-                </div>
-                <div className="mt-4">
-                  <h4 className="font-semibold">Pool Burger</h4>
-                  <p className="text-sm text-white/80 mt-1">Retro poolside burger spot with tropical cocktails</p>
-                  <div className="mt-3 flex gap-2">
-                    <span className="text-xs px-2 py-1 rounded-full bg-white/10">$$</span>
-                    <span className="text-xs px-2 py-1 rounded-full bg-white/10">Burgers</span>
-                    <span className="text-xs px-2 py-1 rounded-full bg-white/10">Poolside</span>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
           <div className="max-w-3xl">
