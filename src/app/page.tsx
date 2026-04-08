@@ -1,7 +1,8 @@
 "use client"
 
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Hero from "../components/Hero";
+import { Recommendation } from '../lib/bourgaeux';
 
 // Remove loading screen when page is fully loaded
 if (typeof window !== 'undefined') {
@@ -19,16 +20,6 @@ import OnboardingForm from "../components/OnboardingForm";
 export default function HomePage() {
   const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
   const [loading, setLoading] = useState(false);
-  const [form, setForm] = useState({
-    city: '',
-    vibe: '',
-    foodPreferences: '',
-    drinkPreferences: '',
-    entertainmentPreferences: '',
-    lifestylePreferences: '',
-    budget: '',
-    dislikes: ''
-  });
 
   useEffect(() => {
     // Load initial recommendations
@@ -43,10 +34,19 @@ export default function HomePage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          city: '',
+          vibe: '',
+          foodPreferences: '',
+          drinkPreferences: '',
+          entertainmentPreferences: '',
+          lifestylePreferences: '',
+          budget: '',
+          dislikes: ''
+        }),
       });
       const data = await res.json();
-      setRecommendations(data.recommendations);
+      setRecommendations(data.recommendations || []);
     } catch (error) {
       console.error('Failed to fetch recommendations:', error);
     } finally {
@@ -91,7 +91,7 @@ export default function HomePage() {
             </div>
 
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {recommendations?.map((rec) => (
+              {recommendations.map((rec) => (
                 <div key={rec.title} className="feature-card group relative overflow-hidden">
                   <div className="absolute -right-10 -top-10 h-24 w-24 rounded-full bg-[#FF7D45]/10 blur-xl"></div>
                   <div className="flex items-center gap-3">
