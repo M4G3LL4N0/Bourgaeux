@@ -18,7 +18,7 @@ const items = [
 
 export default function FutureFeedPreview() {
   return (
-    <section className="card">
+    <section className="card hover:border-white/20 transition-colors">
       <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="section-title">Feed preview</p>
@@ -34,7 +34,7 @@ export default function FutureFeedPreview() {
 
       <div className="grid gap-6 md:grid-cols-3">
         {items.map((item) => (
-          <div key={item.title} className="card">
+          <div key={item.title} className="card transition hover:bg-white/[0.03] hover:border-white/20">
             <p className="text-xs uppercase tracking-[0.2em] text-[#FF7D45]">
               {item.meta}
             </p>

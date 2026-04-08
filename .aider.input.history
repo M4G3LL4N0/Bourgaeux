@@ -131,3 +131,435 @@
 +- keep the project buildable
 +- do not ask questions
 +- make the result feel materially more premium
+
+# 2026-04-07 17:37:57.656245
++SYSTEM MODE: FAST MICRO TASK
++
++Venture: bourgaeux
++Phase: expand_product
++
++Rules:
++- do ONLY one small improvement
++- do NOT refactor entire files
++- do NOT change many files
++- keep changes minimal
++- keep build working
++- no explanations
++- no questions
++
++Goal:
++- make one visible improvement quickly
+
+# 2026-04-07 17:37:57.656921
++SYSTEM MODE: FAST MICRO TASK
++
++Venture: bourgaeux
++Phase: expand_product
++
++Rules:
++- do ONLY one small improvement
++- do NOT refactor entire files
++- do NOT change many files
++- keep changes minimal
++- keep build working
++- no explanations
++- no questions
++
++Goal:
++- make one visible improvement quickly
+
+# 2026-04-07 20:07:31.699097
++SYSTEM MODE: FAST MICRO TASK
++
++Venture: bourgaeux
++Phase: fix_build
++
++Rules:
++- do ONLY one small improvement
++- do NOT refactor entire files
++- do NOT change many files
++- keep changes minimal
++- keep build working
++- no explanations
++- no questions
++
++Goal:
++- make one visible improvement quickly
+
+# 2026-04-07 20:07:31.699945
++SYSTEM MODE: FAST MICRO TASK
++
++Venture: bourgaeux
++Phase: fix_build
++
++Rules:
++- do ONLY one small improvement
++- do NOT refactor entire files
++- do NOT change many files
++- keep changes minimal
++- keep build working
++- no explanations
++- no questions
++
++Goal:
++- make one visible improvement quickly
+
+# 2026-04-07 20:09:13.031849
++SYSTEM MODE: FAST MICRO TASK
++
++Venture: bourgaeux
++Phase: fix_build
++
++Rules:
++- do ONLY one small improvement
++- do NOT refactor entire files
++- do NOT change many files
++- keep changes minimal
++- keep build working
++- no explanations
++- no questions
++
++Goal:
++- make one visible improvement quickly
+
+# 2026-04-07 20:09:13.032187
++SYSTEM MODE: FAST MICRO TASK
++
++Venture: bourgaeux
++Phase: fix_build
++
++Rules:
++- do ONLY one small improvement
++- do NOT refactor entire files
++- do NOT change many files
++- keep changes minimal
++- keep build working
++- no explanations
++- no questions
++
++Goal:
++- make one visible improvement quickly
+
+# 2026-04-07 20:10:58.798770
++SYSTEM MODE: FAST MICRO TASK
++
++Venture: bourgaeux
++Phase: fix_build
++
++Rules:
++- do ONLY one small improvement
++- do NOT refactor entire files
++- do NOT change many files
++- keep changes minimal
++- keep build working
++- no explanations
++- no questions
++
++Goal:
++- make one visible improvement quickly
+
+# 2026-04-07 20:10:58.805797
++SYSTEM MODE: FAST MICRO TASK
++
++Venture: bourgaeux
++Phase: fix_build
++
++Rules:
++- do ONLY one small improvement
++- do NOT refactor entire files
++- do NOT change many files
++- keep changes minimal
++- keep build working
++- no explanations
++- no questions
++
++Goal:
++- make one visible improvement quickly
+
+# 2026-04-07 20:12:59.163523
++SYSTEM MODE: FAST MICRO TASK
++
++Venture: bourgaeux
++Phase: fix_build
++
++Rules:
++- do ONLY one small improvement
++- do NOT refactor entire files
++- do NOT change many files
++- keep changes minimal
++- keep build working
++- no explanations
++- no questions
++
++Goal:
++- make one visible improvement quickly
+
+# 2026-04-07 20:12:59.164106
++SYSTEM MODE: FAST MICRO TASK
++
++Venture: bourgaeux
++Phase: fix_build
++
++Rules:
++- do ONLY one small improvement
++- do NOT refactor entire files
++- do NOT change many files
++- keep changes minimal
++- keep build working
++- no explanations
++- no questions
++
++Goal:
++- make one visible improvement quickly
+
+# 2026-04-07 20:41:14.911659
++SYSTEM MODE: FAST MICRO TASK
++
++Venture: bourgaeux
++Phase: fix_build
++
++Rules:
++- do ONLY one small improvement
++- do NOT refactor entire files
++- do NOT change many files
++- keep changes minimal
++- keep build working
++- no explanations
++- no questions
++
++Goal:
++- make one visible improvement quickly
+
+# 2026-04-07 20:41:14.912681
++SYSTEM MODE: FAST MICRO TASK
++
++Venture: bourgaeux
++Phase: fix_build
++
++Rules:
++- do ONLY one small improvement
++- do NOT refactor entire files
++- do NOT change many files
++- keep changes minimal
++- keep build working
++- no explanations
++- no questions
++
++Goal:
++- make one visible improvement quickly
+
+# 2026-04-07 20:47:38.795098
++SYSTEM MODE: FAST MICRO TASK
++
++Venture: bourgaeux
++Phase: fix_build
++
++Rules:
++- do ONLY one small improvement
++- do NOT refactor entire files
++- do NOT change many files
++- keep changes minimal
++- keep build working
++- no explanations
++- no questions
++
++Goal:
++- make one visible improvement quickly
+
+# 2026-04-07 20:47:38.795806
++SYSTEM MODE: FAST MICRO TASK
++
++Venture: bourgaeux
++Phase: fix_build
++
++Rules:
++- do ONLY one small improvement
++- do NOT refactor entire files
++- do NOT change many files
++- keep changes minimal
++- keep build working
++- no explanations
++- no questions
++
++Goal:
++- make one visible improvement quickly
+
+# 2026-04-07 20:52:18.126634
++SYSTEM MODE: FAST MICRO TASK
++
++Venture: bourgaeux
++Phase: fix_build
++
++Rules:
++- do ONLY one small improvement
++- do NOT refactor entire files
++- do NOT change many files
++- keep changes minimal
++- keep build working
++- no explanations
++- no questions
++
++Goal:
++- make one visible improvement quickly
+
+# 2026-04-07 20:52:18.127009
++SYSTEM MODE: FAST MICRO TASK
++
++Venture: bourgaeux
++Phase: fix_build
++
++Rules:
++- do ONLY one small improvement
++- do NOT refactor entire files
++- do NOT change many files
++- keep changes minimal
++- keep build working
++- no explanations
++- no questions
++
++Goal:
++- make one visible improvement quickly
+
+# 2026-04-07 20:55:09.926723
++Fix or improve this project.
++
++Focus ONLY on:
++- fixing errors
++- improving UI slightly
++- small high-impact changes
++
++DO NOT:
++- rewrite large files
++- add new systems
++- over-engineer
++
++Make minimal edits only.
+
+# 2026-04-07 20:55:09.927110
++Fix or improve this project.
++
++Focus ONLY on:
++- fixing errors
++- improving UI slightly
++- small high-impact changes
++
++DO NOT:
++- rewrite large files
++- add new systems
++- over-engineer
++
++Make minimal edits only.
+
+# 2026-04-07 20:56:11.928244
++Fix or improve this project.
++
++Focus ONLY on:
++- fixing errors
++- improving UI slightly
++- small high-impact changes
++
++DO NOT:
++- rewrite large files
++- add new systems
++- over-engineer
++
++Make minimal edits only.
+
+# 2026-04-07 20:56:11.928594
++Fix or improve this project.
++
++Focus ONLY on:
++- fixing errors
++- improving UI slightly
++- small high-impact changes
++
++DO NOT:
++- rewrite large files
++- add new systems
++- over-engineer
++
++Make minimal edits only.
+
+# 2026-04-07 21:00:26.622687
++Fix or improve this project.
++
++Focus ONLY on:
++- fixing errors
++- improving UI slightly
++- small high-impact changes
++
++DO NOT:
++- rewrite large files
++- add new systems
++- over-engineer
++
++Make minimal edits only.
+
+# 2026-04-07 21:00:26.623427
++Fix or improve this project.
++
++Focus ONLY on:
++- fixing errors
++- improving UI slightly
++- small high-impact changes
++
++DO NOT:
++- rewrite large files
++- add new systems
++- over-engineer
++
++Make minimal edits only.
+
+# 2026-04-07 21:03:44.035549
++Fix or improve this project.
++
++Focus ONLY on:
++- fixing errors
++- improving UI slightly
++- small high-impact changes
++
++DO NOT:
++- rewrite large files
++- add new systems
++- over-engineer
++
++Make minimal edits only.
+
+# 2026-04-07 21:03:44.035880
++Fix or improve this project.
++
++Focus ONLY on:
++- fixing errors
++- improving UI slightly
++- small high-impact changes
++
++DO NOT:
++- rewrite large files
++- add new systems
++- over-engineer
++
++Make minimal edits only.
+
+# 2026-04-07 21:43:06.861810
++Fix the current build failure only.
++
++Failure type: generic_build_failure
++
++Rules:
++- minimal edits only
++- target only files related to the build failure
++- do not redesign the UI
++- do not add features
++- return exact code edits only
+
+# 2026-04-07 21:43:06.862184
++Fix the current build failure only.
++
++Failure type: generic_build_failure
++
++Rules:
++- minimal edits only
++- target only files related to the build failure
++- do not redesign the UI
++- do not add features
++- return exact code edits only

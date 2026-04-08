@@ -13,7 +13,7 @@ export default function RecommendationCard({
         <h4 className="text-lg font-semibold text-white">
           {recommendation.title}
         </h4>
-        <span className="rounded-full border border-[#FF7D45]/40 bg-[#FF7D45]/10 px-3 py-1 text-xs uppercase tracking-[0.2em] text-[#FF7D45]">
+        <span className="rounded-full border border-[#FF7D45]/30 bg-[#FF7D45]/10 px-3 py-1 text-xs uppercase tracking-[0.2em] text-[#FF7D45] hover:bg-[#FF7D45]/20 transition-colors">
           {recommendation.category}
         </span>
       </div>

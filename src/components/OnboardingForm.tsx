@@ -140,9 +140,9 @@ export default function OnboardingForm() {
           <button
             type="submit"
             disabled={loading}
-            className="mt-2 rounded-2xl border border-[#d4b06a]/40 bg-[#d4b06a] px-5 py-3 text-sm font-semibold text-black transition hover:bg-[#e7c27b] disabled:cursor-not-allowed disabled:opacity-60"
+            className="mt-2 btn-primary px-5 py-3 text-sm disabled:cursor-not-allowed disabled:opacity-60 transition-opacity"
           >
-            {loading ? "Expanding your life..." : "Generate Bourgaeux recommendations"}
+            {loading ? "Expanding your life..." : "Generate recommendations"}
           </button>
 
           {error ? <p className="text-sm text-red-300">{error}</p> : null}
@@ -194,7 +194,7 @@ export default function OnboardingForm() {
                 {result.recommendations.map((item) => (
                   <div
                     key={`${item.category}-${item.title}`}
-                    className="rounded-2xl border border-white/10 bg-black/30 p-4"
+                    className={`rounded-2xl border border-white/10 bg-black/30 p-4 ${loading ? 'opacity-60 cursor-not-allowed' : 'hover:border-white/20 hover:bg-white/[0.03]'} transition-all`}
                   >
                     <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                       <h4 className="text-lg font-semibold text-white">{item.title}</h4>
@@ -270,7 +270,7 @@ function Input({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="rounded-2xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white placeholder:text-white/30"
+        className="rounded-2xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white placeholder:text-white/30 hover:border-white/20 transition-colors"
       />
     </label>
   );
@@ -295,7 +295,7 @@ function Textarea({
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         rows={4}
-        className="rounded-2xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white placeholder:text-white/30"
+        className="rounded-2xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white placeholder:text-white/30 hover:border-white/20 transition-colors"
       />
     </label>
   );
