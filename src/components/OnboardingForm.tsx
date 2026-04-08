@@ -204,6 +204,20 @@ export default function OnboardingForm() {
             value={form.vibe}
             onChange={(value) => updateField("vibe", value)}
           />
+          <button 
+            type="submit" 
+            className={`btn-primary mt-6 ${loading ? 'loading' : ''}`}
+            disabled={loading}
+          >
+            {loading ? (
+              <div className="flex items-center gap-2">
+                <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
+                <span>Finding Recommendations...</span>
+              </div>
+            ) : (
+              'Get Recommendations'
+            )}
+          </button>
 
           <Textarea
             label="Food preferences"
