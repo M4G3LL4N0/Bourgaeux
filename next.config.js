@@ -4,6 +4,9 @@ const nextConfig = {
     optimizePackageImports: ['lucide-react'],
     serverActions: true,
   },
+  typescript: {
+    ignoreBuildErrors: false,
+  },
   images: {
     remotePatterns: [
       {
