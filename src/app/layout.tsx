@@ -27,7 +27,12 @@ export default function RootLayout({
               <div className="h-1.5 w-40 bg-white/10 rounded-full overflow-hidden">
                 <div className="h-full bg-gradient-to-r from-[#FF7D45] to-[#FF3D71] animate-progress w-0"></div>
               </div>
-              <p className="text-xs text-white/60 mt-2">Curating your experience...</p>
+              <p className="text-xs text-white/60 mt-2 animate-pulse">Curating your experience...</p>
+              <div className="flex gap-2 mt-4">
+                <div className="h-2 w-2 rounded-full bg-[#FF7D45] animate-bounce" style={{animationDelay: '0ms'}}></div>
+                <div className="h-2 w-2 rounded-full bg-[#FF5E62] animate-bounce" style={{animationDelay: '150ms'}}></div>
+                <div className="h-2 w-2 rounded-full bg-[#FF3D71] animate-bounce" style={{animationDelay: '300ms'}}></div>
+              </div>
             </div>
           </div>
         </div>

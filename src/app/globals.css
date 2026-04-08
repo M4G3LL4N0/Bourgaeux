@@ -52,7 +52,14 @@
   .feature-card {
     @apply flex flex-col gap-4 rounded-2xl border border-white/10 bg-gradient-to-b from-white/5 to-white/[0.02] backdrop-blur-sm p-6 shadow-xl transition-all;
     --orange-glow-intensities: 0.1;
-    @apply hover-orange-glow;
+    @apply hover-orange-glow hover:translate-y-[-2px];
+  }
+  
+  .feature-card .feature-content {
+    @apply transition-all duration-300;
+  }
+  .feature-card:hover .feature-content {
+    @apply opacity-90;
   }
   .testimonial-card {
     @apply flex flex-col gap-4 rounded-2xl border border-white/10 bg-gradient-to-b from-white/5 to-white/[0.02] backdrop-blur-sm p-6 shadow-xl;

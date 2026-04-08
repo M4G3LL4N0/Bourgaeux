@@ -111,16 +111,18 @@ export default function HomePage() {
 
           <div className="grid gap-6 md:grid-cols-3 mb-12">
             <div className="feature-card group">
-              <div className="feature-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-clock">
-                  <circle cx="12" cy="12" r="10"/>
-                  <polyline points="12 6 12 12 16 14"/>
-                </svg>
+              <div className="feature-content">
+                <div className="feature-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-clock">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold">Recent Activity</h3>
+                <p className="text-white/80">
+                  See what's new from your network and trending in your city.
+                </p>
               </div>
-              <h3 className="text-xl font-semibold">Recent Activity</h3>
-              <p className="text-white/80">
-                See what's new from your network and trending in your city.
-              </p>
               <div className="mt-4 pt-4 border-t border-white/10 opacity-0 group-hover:opacity-100 transition-opacity">
                 <button className="text-xs text-[#FF7D45] hover:text-[#FF5E62] transition-colors">
                   View Updates
