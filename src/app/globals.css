@@ -15,8 +15,12 @@
   .card {
     @apply rounded-2xl border border-white/10 bg-gradient-to-b from-white/5 to-white/[0.02] backdrop-blur-sm p-6 shadow-xl;
   }
+  .hover-orange-glow {
+    @apply transition-all hover:shadow-[0_8px_30px_rgba(255,125,69,0.3)];
+  }
+  
   .btn-primary {
-    @apply rounded-xl bg-gradient-to-r from-[#FF7D45] via-[#FF5E62] to-[#FF3D71] px-6 py-3 font-medium text-white shadow-lg transition-all hover:shadow-[0_8px_30px_rgba(255,125,69,0.3)] hover:scale-[1.02];
+    @apply rounded-xl bg-gradient-to-r from-[#FF7D45] via-[#FF5E62] to-[#FF3D71] px-6 py-3 font-medium text-white shadow-lg hover-orange-glow hover:scale-[1.02];
   }
   .btn-primary.loading {
     @apply pointer-events-none brightness-90 relative;
@@ -35,7 +39,7 @@
     @apply text-3xl font-semibold tracking-tight sm:text-4xl;
   }
   .feature-card {
-    @apply flex flex-col gap-4 rounded-2xl border border-white/10 bg-gradient-to-b from-white/5 to-white/[0.02] backdrop-blur-sm p-6 shadow-xl transition-all hover:border-white/20 hover:shadow-[0_8px_30px_rgba(255,125,69,0.1)];
+    @apply flex flex-col gap-4 rounded-2xl border border-white/10 bg-gradient-to-b from-white/5 to-white/[0.02] backdrop-blur-sm p-6 shadow-xl transition-all hover:border-white/20 hover-orange-glow;
   }
   .testimonial-card {
     @apply flex flex-col gap-4 rounded-2xl border border-white/10 bg-gradient-to-b from-white/5 to-white/[0.02] backdrop-blur-sm p-6 shadow-xl;
