@@ -10,6 +10,75 @@ export default function HomePage() {
         <FutureFeedPreview />
 
         <section className="grid gap-8">
+          <div className="card">
+            <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <p className="section-title">Fresh Picks</p>
+                <h3 className="mt-3 section-heading">
+                  Recently recommended <span className="text-[#FF7D45]">experiences</span>
+                </h3>
+              </div>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              <div className="feature-card">
+                <div className="flex items-center gap-3">
+                  <div className="h-10 w-10 rounded-full bg-gradient-to-r from-[#FF7D45] via-[#FF5E62] to-[#FF3D71]"></div>
+                  <div>
+                    <p className="font-medium">Alexandra R.</p>
+                    <p className="text-sm text-white/60">Miami</p>
+                  </div>
+                </div>
+                <div className="mt-4">
+                  <h4 className="font-semibold">Bar Marilou</h4>
+                  <p className="text-sm text-white/80 mt-1">Luxury cocktail bar with Parisian vibes and live jazz</p>
+                  <div className="mt-3 flex gap-2">
+                    <span className="text-xs px-2 py-1 rounded-full bg-white/10">$$$</span>
+                    <span className="text-xs px-2 py-1 rounded-full bg-white/10">Cocktails</span>
+                    <span className="text-xs px-2 py-1 rounded-full bg-white/10">Live Music</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="feature-card">
+                <div className="flex items-center gap-3">
+                  <div className="h-10 w-10 rounded-full bg-gradient-to-r from-[#FF7D45] via-[#FF5E62] to-[#FF3D71]"></div>
+                  <div>
+                    <p className="font-medium">James K.</p>
+                    <p className="text-sm text-white/60">Chicago</p>
+                  </div>
+                </div>
+                <div className="mt-4">
+                  <h4 className="font-semibold">Kumiko</h4>
+                  <p className="text-sm text-white/80 mt-1">Japanese-inspired tasting menu with cocktail pairings</p>
+                  <div className="mt-3 flex gap-2">
+                    <span className="text-xs px-2 py-1 rounded-full bg-white/10">$$$$</span>
+                    <span className="text-xs px-2 py-1 rounded-full bg-white/10">Omakase</span>
+                    <span className="text-xs px-2 py-1 rounded-full bg-white/10">Date Night</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="feature-card">
+                <div className="flex items-center gap-3">
+                  <div className="h-10 w-10 rounded-full bg-gradient-to-r from-[#FF7D45] via-[#FF5E62] to-[#FF3D71]"></div>
+                  <div>
+                    <p className="font-medium">Sophie M.</p>
+                    <p className="text-sm text-white/60">Austin</p>
+                  </div>
+                </div>
+                <div className="mt-4">
+                  <h4 className="font-semibold">Pool Burger</h4>
+                  <p className="text-sm text-white/80 mt-1">Retro poolside burger spot with tropical cocktails</p>
+                  <div className="mt-3 flex gap-2">
+                    <span className="text-xs px-2 py-1 rounded-full bg-white/10">$$</span>
+                    <span className="text-xs px-2 py-1 rounded-full bg-white/10">Burgers</span>
+                    <span className="text-xs px-2 py-1 rounded-full bg-white/10">Poolside</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <div className="max-w-3xl">
             <p className="section-title">Social + AI for real life</p>
             <h2 className="mt-4 section-heading">
