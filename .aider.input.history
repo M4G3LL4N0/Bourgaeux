@@ -1348,3 +1348,61 @@
 +- do not make cosmetic-only changes
 +- make the project buildable
 +
+
+# 2026-04-08 12:39:52.809756
++Venture: bourgaeux
++State: functional
++Lane: feature
++
++Current mission:
++- add meaningful product capability
++- strengthen UX flow
++- improve conversion surfaces
++
++Rules:
++- make meaningful progress
++- preserve build stability
++- fix root causes
++- prefer deploy-worthy output
++- avoid tiny cosmetic-only changes unless bundled with stronger progress
++
++Build error context:
++
++> bourgaeux@0.1.0 build
++> next build
++
++  ▲ Next.js 14.2.35
++  - Environments: .env.local
++
++   Creating an optimized production build ...
++ ✓ Compiled successfully
++   Linting and checking validity of types ...
++   Collecting page data ...
++Missing API_KEY environment variable
++   Generating static pages (0/5) ...
++Missing API_KEY environment variable
++   Generating static pages (1/5) 
++   Generating static pages (2/5) 
++   Generating static pages (3/5) 
++ ✓ Generating static pages (5/5)
++   Finalizing page optimization ...
++   Collecting build traces ...
++
++Route (app)                              Size     First Load JS
++┌ ○ /                                    5.34 kB        92.8 kB
++├ ○ /_not-found                          916 B          88.4 kB
++└ ƒ /api/recommend                       0 B                0 B
+++ First Load JS shared by all            87.4 kB
++  ├ chunks/117-cd85a90f2719592f.js       31.8 kB
++  ├ chunks/fd9d1056-5d891dff300e64c3.js  53.7 kB
++  └ other shared chunks (total)          1.94 kB
++
++
++○  (Static)   prerendered as static content
++ƒ  (Dynamic)  server-rendered on demand
++
++Rules:
++- fix the actual build error shown above
++- do not make cosmetic-only changes
++- make the project buildable
++
