@@ -98,7 +98,7 @@ export default function HomePage() {
                     <div className="h-10 w-10 rounded-full bg-gradient-to-r from-[#FF7D45] via-[#FF5E62] to-[#FF3D71]"></div>
                     <div>
                       <p className="font-medium">{rec.recommendedBy || 'Bourgaeux'}</p>
-                      <p className="text-sm text-white/60">{form.city || 'Your City'}</p>
+                      <p className="text-sm text-white/60">{rec.city || 'Your City'}</p>
                     </div>
                   </div>
                   <div className="mt-4">
