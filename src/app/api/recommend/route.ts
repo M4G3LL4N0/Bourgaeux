@@ -4,21 +4,20 @@ import {
   recommendationInputSchema,
 } from "../../../lib/bourgaeux";
 
-const isProduction = process.env.NODE_ENV === 'production';
-const hasApiKey = !!process.env.API_KEY;
-
-if (isProduction && !process.env.API_KEY) {
-  console.error('Missing API_KEY environment variable - production mode requires API key');
-  return NextResponse.json(
-    { 
-      error: "API key required for production",
-      code: "API_KEY_REQUIRED" 
-    }, 
-    { status: 401 }
-  );
-}
-
 export async function POST(req: NextRequest) {
+  const isProduction = process.env.NODE_ENV === 'production';
+  const hasApiKey = !!process.env.API_KEY;
+
+  if (isProduction && !process.env.API_KEY) {
+    console.error('Missing API_KEY environment variable - production mode requires API key');
+    return NextResponse.json(
+      { 
+        error: "API key required for production",
+        code: "API_KEY_REQUIRED" 
+      }, 
+      { status: 401 }
+    );
+  }
   try {
     const json = await req.json();
     const input = recommendationInputSchema.parse(json);
