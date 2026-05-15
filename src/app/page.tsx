@@ -1,264 +1,58 @@
-"use client"
-
-import { useState, useEffect } from 'react';
-import Hero from "../components/Hero";
-import { Recommendation } from '../lib/bourgaeux';
-
-// Remove loading screen when page is fully loaded
-if (typeof window !== 'undefined') {
-  window.addEventListener('load', () => {
-    const loadingScreen = document.getElementById('loading-screen');
-    if (loadingScreen) {
-      loadingScreen.style.opacity = '0';
-      setTimeout(() => loadingScreen.remove(), 300);
-    }
-  });
-}
 import FutureFeedPreview from "../components/FutureFeedPreview";
+import Hero from "../components/Hero";
 import OnboardingForm from "../components/OnboardingForm";
 
+const pillars = [
+  {
+    title: "Taste identity",
+    body: "A profile built from where you go, what you skip, and what your social circle unlocks.",
+  },
+  {
+    title: "Blind-spot detection",
+    body: "Recommendations that surface the cuisines, rooms, rituals, and experiences missing from your real life.",
+  },
+  {
+    title: "Social discovery",
+    body: "A future feed for people, places, and taste signals instead of generic ratings.",
+  },
+];
+
 export default function HomePage() {
-  const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    // Load initial recommendations
-    fetchRecommendations();
-  }, []);
-
-  const fetchRecommendations = async () => {
-    setLoading(true);
-    try {
-      const res = await fetch('/api/recommend', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          city: '',
-          vibe: '',
-          foodPreferences: '',
-          drinkPreferences: '',
-          entertainmentPreferences: '',
-          lifestylePreferences: '',
-          budget: '',
-          dislikes: ''
-        }),
-      });
-      const data = await res.json();
-      setRecommendations(data.recommendations || []);
-    } catch (error) {
-      console.error('Failed to fetch recommendations:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleSaveRecommendation = async (rec: Recommendation) => {
-    try {
-      await fetch('/api/save', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(rec),
-      });
-      // Update local state to reflect saved status
-      setRecommendations(prev => 
-        prev.map(r => 
-          r.title === rec.title ? {...r, saved: true} : r
-        )
-      );
-    } catch (error) {
-      console.error('Failed to save recommendation:', error);
-    }
-  };
   return (
-    <main className="min-h-screen p-4 sm:p-8">
-      <div className="mx-auto flex max-w-6xl flex-col gap-12">
+    <main className="min-h-screen">
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-14 px-4 py-5 sm:px-6 lg:px-8">
         <Hero />
+
+        <section id="how-it-works" className="grid gap-5 md:grid-cols-3">
+          {pillars.map((pillar) => (
+            <article key={pillar.title} className="feature-card">
+              <p className="section-title">{pillar.title}</p>
+              <p className="text-sm leading-6 text-white/70">{pillar.body}</p>
+            </article>
+          ))}
+        </section>
+
+        <OnboardingForm />
         <FutureFeedPreview />
 
-        <section className="grid gap-8">
-          <div className="card">
-            <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <section className="pb-12">
+          <div className="rounded-3xl border border-[#d9b66f]/20 bg-[#d9b66f]/10 p-6 sm:p-8">
+            <p className="section-title">Early access</p>
+            <div className="mt-4 grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
               <div>
-                <p className="section-title">Fresh Picks</p>
-                <h3 className="mt-3 section-heading">
-                  Recently recommended <span className="text-[#FF7D45]">experiences</span>
-                </h3>
-              </div>
-            </div>
-
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {recommendations.map((rec) => (
-                <div key={rec.title} className="feature-card group relative overflow-hidden">
-                  <div className="absolute -right-10 -top-10 h-24 w-24 rounded-full bg-[#FF7D45]/10 blur-xl"></div>
-                  <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-full bg-gradient-to-r from-[#FF7D45] via-[#FF5E62] to-[#FF3D71]"></div>
-                    <div>
-                      <p className="font-medium">{rec.recommendedBy || 'Bourgaeux'}</p>
-                      <p className="text-sm text-white/60">{rec.city || 'Your City'}</p>
-                    </div>
-                  </div>
-                  <div className="mt-4">
-                    <h4 className="font-semibold">{rec.title}</h4>
-                    <p className="text-sm text-white/80 mt-1">{rec.reason}</p>
-                    <div className="mt-3 flex flex-wrap gap-2">
-                      <span className="text-xs px-2 py-1 rounded-full bg-white/10">{rec.budget || '$$'}</span>
-                      {rec.tags?.map(tag => (
-                        <span key={tag} className="text-xs px-2 py-1 rounded-full bg-white/10">{tag}</span>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="mt-4 pt-4 border-t border-white/10 opacity-0 group-hover:opacity-100 transition-opacity flex justify-between items-center">
-                    <button 
-                      className="text-xs text-[#FF7D45] hover:text-[#FF5E62] transition-colors"
-                      onClick={() => handleSaveRecommendation(rec)}
-                    >
-                      Save to profile
-                    </button>
-                    <span className="text-xs text-white/60">{rec.likes || 0} friends like this</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="max-w-3xl">
-            <p className="section-title">Social + AI for real life</p>
-            <h2 className="mt-4 section-heading">
-              Discover the restaurants, drinks, and experiences you're missing
-            </h2>
-            <p className="mt-5 max-w-2xl text-lg leading-8 text-white/80">
-              Bourgaeux is a lifestyle intelligence network combining premium recommendations, 
-              taste expansion, and social discovery.
-            </p>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-3 mb-12">
-            <div className="feature-card group">
-              <div className="feature-content">
-                <div className="feature-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-clock">
-                    <circle cx="12" cy="12" r="10"/>
-                    <polyline points="12 6 12 12 16 14"/>
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold">Recent Activity</h3>
-                <p className="text-white/80">
-                  See what's new from your network and trending in your city.
+                <h2 className="max-w-3xl text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+                  Build a life with better inputs.
+                </h2>
+                <p className="mt-4 max-w-2xl text-sm leading-6 text-white/70">
+                  Bourgaeux starts with AI lifestyle recommendations and grows
+                  into a social taste graph for food, drink, culture, and the
+                  experiences people did not know they were missing.
                 </p>
               </div>
-              <div className="mt-4 pt-4 border-t border-white/10 opacity-0 group-hover:opacity-100 transition-opacity flex justify-between items-center">
-                <button className="text-xs text-[#FF7D45] hover:text-[#FF5E62] transition-colors">
-                  View Updates
-                </button>
-                <span className="text-xs text-white/60">12 new</span>
-              </div>
+              <a href="#recommend" className="btn-primary text-center">
+                Start taste read
+              </a>
             </div>
-            <div className="feature-card">
-              <div className="feature-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-sparkles">
-                  <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
-                  <path d="M5 3v4"/>
-                  <path d="M19 17v4"/>
-                  <path d="M3 5h4"/>
-                  <path d="M17 19h4"/>
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold">Personalized Discovery</h3>
-              <p className="text-white/80">
-                AI-powered recommendations tailored to your unique tastes and preferences.
-              </p>
-            </div>
-
-            <div className="feature-card">
-              <div className="feature-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-users">
-                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-                  <circle cx="9" cy="7" r="4"/>
-                  <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold">Social Curation</h3>
-              <p className="text-white/80">
-                Discover what your friends and trusted tastemakers are loving right now.
-              </p>
-            </div>
-
-            <div className="feature-card">
-              <div className="feature-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-compass">
-                  <circle cx="12" cy="12" r="10"/>
-                  <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold">Taste Expansion</h3>
-              <p className="text-white/80">
-                Explore new experiences curated to expand your horizons while staying true to your style.
-              </p>
-            </div>
-          </div>
-
-          <div className="form-section">
-            <div className="max-w-3xl mx-auto text-center mb-8">
-              <h2 className="section-heading">
-                Ready to elevate your lifestyle?
-              </h2>
-              <p className="mt-4 text-lg text-white/80">
-                Join Bourgaeux today and start discovering the best experiences in your city.
-              </p>
-              <div className="mt-6">
-                <button 
-                  className="btn-primary" 
-                  onClick={(e) => {
-                    e.currentTarget.classList.add('loading');
-                    // Simulate async operation
-                    setTimeout(() => {
-                      e.currentTarget.classList.remove('loading');
-                    }, 2000);
-                  }}
-                >
-                  Get Started
-                </button>
-              </div>
-            </div>
-
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-12">
-              <div className="testimonial-card">
-                <p className="text-white/80 italic">
-                  "Bourgaeux completely changed how I explore my city. The recommendations are spot on!"
-                </p>
-                <div className="flex items-center gap-3 mt-4">
-                  <div className="h-10 w-10 rounded-full bg-gradient-to-r from-[#FF7D45] via-[#FF5E62] to-[#FF3D71]"></div>
-                  <div>
-                    <p className="font-medium">Sarah L.</p>
-                    <p className="text-sm text-white/60">Los Angeles</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="testimonial-card">
-                <p className="text-white/80 italic">
-                  "I've discovered so many amazing places I never would have found on my own."
-                </p>
-                <div className="flex items-center gap-3 mt-4">
-                  <div className="h-10 w-10 rounded-full bg-gradient-to-r from-[#FF7D45] via-[#FF5E62] to-[#FF3D71]"></div>
-                  <div>
-                    <p className="font-medium">Michael T.</p>
-                    <p className="text-sm text-white/60">New York</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="stats-card">
-                <h3 className="text-3xl font-bold">10,000+</h3>
-                <p className="text-white/80">Experiences Discovered</p>
-              </div>
-            </div>
-
-            <OnboardingForm />
           </div>
         </section>
       </div>
