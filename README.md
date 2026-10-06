@@ -1,44 +1,37 @@
 # Bourgaeux
 
-> **STATUS: UNDOCUMENTED** — this README was generated from the repository's own contents. It records what is present, not what the project intends to become.
+**STATUS: EXPERIMENTAL**
 
-## Purpose
+Bourgaeux. build via `package.json`.
 
-Repository contents indicate: TypeScript.
+## Why it exists
 
-## What is in this repository
+> cd /Users/joshuadavis/startups/bourgaeux && pnpm dev
 
-Files present at the repository root:
+## What is in it
 
-- `.aider.chat.history.md`
-- `.aider.input.history`
-- `.git-backup-before-clean-history`
-- `bourgaeux@0.1.0`
-- `next`
-- `next-env.d.ts`
-- `next.config.js`
-- `package-lock.json`
-- `package.json`
-- `public-site`
-- `src`
-- `startupjourney.md`
-- `tsconfig.json`
-
-## Engineering status
-
-| property | value |
+| | |
 | --- | --- |
-| Primary language | TypeScript |
-| License | not recorded |
-| Last push | 2026-10-06 |
-| Topics | none set |
-| Test suite | not established — no test evidence has been measured |
-| CI | not established — no CI evidence has been measured |
+| Source files | 12 |
+| Test files | 0 |
+| Documentation files | 6 |
+| CI workflows | 0 |
+| Build manifest | package.json |
 
-Nothing in this table is inferred. Where a value could not be read from the repository it says so.
+Observed: 12 source file(s); build via `package.json`.
 
-Homepage: <https://bourgaeux.vercel.app>
+## Build and run
 
-## Notes
+```bash
+pnpm install
+pnpm build
+pnpm test
+```
 
-This repository predates the current documentation standard. The README above is intentionally minimal and factual rather than promotional: it would be easy to write an impressive description here, and nothing in this repository would make it true.
+## Evidence
+
+Counts above are counted from the repository tree, not asserted. Where a value could not be measured it is omitted rather than estimated.
+
+---
+
+Part of the DUNG30N5 × NOAERTH portfolio. Repository: [`M4G3LL4N0/Bourgaeux`](https://github.com/M4G3LL4N0/Bourgaeux).
